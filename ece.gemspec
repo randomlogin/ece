@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Ece::VERSION
   spec.authors       = ["Alexander Shevtsov"]
   spec.email         = ["randomlogin76@gmail.com"]
-  spec.license       = ["MIT"]
+  spec.license       = "MIT"
   spec.summary       = "Ruby implementation of encrypted content-encoding"
   spec.homepage      = "https://github.com/randomlogin/ece"
 
