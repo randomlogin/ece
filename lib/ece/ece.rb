@@ -2,7 +2,6 @@ require 'openssl'
 require 'hkdf'
 require 'base64'
 
-#fore testing purposes only
 #TODO: variable padding
 
 class Ece
@@ -48,7 +47,7 @@ class Ece
 
   def self.encrypt(data, params)
     key = extract_key(params)
-    rs = 4095 #look TODO
+    rs = 4095 #should be variable, but for now it's constant
     result = ""
     counter = 0
     (0..data.length).step(rs) do |i|
@@ -65,9 +64,9 @@ class Ece
     gcm.decrypt
     gcm.key = params[:key]
     gcm.iv = generate_nonce(params[:nonce], counter)
-    gcm.auth_tag = buffer[-16..-1]
-    decrypted = gcm.update(buffer[0..-17]) + gcm.final
-    #padding = decrypted[0]
+    gcm.auth_tag = buffer[-TAG_LENGTH..-1]
+    decrypted = gcm.update(buffer[0..-TAG_LENGTH-1]) + gcm.final
+    #padding = decrypted[0]  -- this would be used once variable record-size is implemented
     #padding_length = decrypted[0].unpack("C")
     #raise Err unless padding = "\x00"*padding_length
     decrypted[1..-1]
