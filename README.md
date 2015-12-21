@@ -33,7 +33,8 @@ Ece.encrypt(data, key: key, salt: salt)
 
 Ece.decrypt(data, key: key, salt: salt)
 ```
+Data can be bytestring as well.
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ece.
+Bug reports and pull requests are welcome on GitHub at https://github.com/randomlogin/ece.
 
