@@ -22,16 +22,20 @@ Or install it yourself as:
 
 ## Usage
 
-```
+Encrypting:
+
+```ruby
 require 'ece'
 
 key = Random.new.bytes(16)
 salt = Random.new.bytes(16)
 data = "Your very private data"
 
-Ece.encrypt(data, key: key, salt: salt)
-
-Ece.decrypt(data, key: key, salt: salt)
+encrypted_data = Ece.encrypt(data, key: key, salt: salt)
+```
+Decrypting:
+```ruby
+Ece.decrypt(encrypted_data, key: key, salt: salt)
 ```
 Data can be bytestring as well.
 ## Contributing
