@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 # Ece
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ece`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ruby implementation of encrypted content-encoding. 
 
-TODO: Delete this and the text above, and describe your gem
+https://tools.ietf.org/html/draft-thomson-http-encryption-02
 
 ## Installation
 
@@ -23,19 +22,18 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+require 'ece'
 
-## Development
+key = Random.new.bytes(16)
+salt = Random.new.bytes(16)
+data = "Your very private data"
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Ece.encrypt(data, key: key, salt: salt)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
+Ece.decrypt(data, key: key, salt: salt)
+```
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ece.
 
-=======
-# ece
-Ruby encrypted content-encoding
->>>>>>> 9a47d647bed3fd5c4b5389aa2fd0b8a417e37ada

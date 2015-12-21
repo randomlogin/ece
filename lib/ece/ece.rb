@@ -6,7 +6,7 @@ require 'base64'
 #TODO: variable padding
 
 class Ece
-  
+
   KEY_LENGTH=16
   TAG_LENGTH=16
   NONCE_LENGTH=12
@@ -78,7 +78,7 @@ class Ece
     rs = 4096+16 #not changeable for now
     result = ""
     counter = 0
-    (0..buffer.length).step(rs) do |i|
+    (0..data.length).step(rs) do |i|
       block = decrypt_record(key, counter, data[i..i+rs-1])
       result += block
       counter +=1
