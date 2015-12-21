@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ece
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ece`. To experiment with that code, run `bin/console` for an interactive prompt.
@@ -34,3 +35,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ece.
 
+=======
+# ece
+Ruby encrypted content-encoding
+>>>>>>> 9a47d647bed3fd5c4b5389aa2fd0b8a417e37ada
