@@ -5,7 +5,7 @@ require 'ece/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "ece"
-  spec.version       = Ece::VERSION
+  spec.version       = ECE::VERSION
   spec.authors       = ["Alexander Shevtsov"]
   spec.email         = ["randomlogin76@gmail.com"]
   spec.license       = "MIT"

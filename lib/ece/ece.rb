@@ -4,7 +4,7 @@ require 'base64'
 
 #TODO: variable padding
 
-class Ece
+class ECE
 
   KEY_LENGTH=16
   TAG_LENGTH=16

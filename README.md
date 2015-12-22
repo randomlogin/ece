@@ -1,4 +1,4 @@
-# Ece
+# ECE
 
 Ruby implementation of encrypted content-encoding. 
 
@@ -31,11 +31,11 @@ key = Random.new.bytes(16)
 salt = Random.new.bytes(16)
 data = "Your very private data"
 
-encrypted_data = Ece.encrypt(data, key: key, salt: salt)
+encrypted_data = ECE.encrypt(data, key: key, salt: salt)
 ```
 Decrypting:
 ```ruby
-Ece.decrypt(encrypted_data, key: key, salt: salt)
+ECE.decrypt(encrypted_data, key: key, salt: salt)
 ```
 Data can be bytestring as well.
 ## Contributing
