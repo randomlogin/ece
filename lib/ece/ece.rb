@@ -62,9 +62,14 @@ class ECE
     raise "The rs parameter must be greater than 1." if rs <= 1
     rs -=1 #this ensures encrypted data cannot be truncated
     result = ""
+    pad_bytes = 1
+    if params[:auth] # old spec used 1 byte for padding, latest one always uses 2 bytes
+      pad_bytes = 2
+    end
+
     counter = 0
-    (0..data.length).step(rs) do |i|
-      block = encrypt_record(key, counter, data[i..i+rs-1], padsize)
+    (0..data.length).step(rs-pad_bytes+1) do |i|
+      block = encrypt_record(key, counter, data[i..i+rs-pad_bytes], padsize)
       result += block
       counter +=1
     end
@@ -75,7 +80,7 @@ class ECE
     key = extract_key(params)
     rs = params[:rs] ? params [:rs] : 4096
     raise "The rs parameter must be greater than 1." if rs <= 1
-    rs += 16
+    rs += TAG_LENGTH
     raise "Message is truncated" if data.length % rs == 0
     result = ""
     counter = 0
@@ -92,7 +97,11 @@ class ECE
     gcm.decrypt
     gcm.key = params[:key]
     gcm.iv = generate_nonce(params[:nonce], counter)
-    raise "Block is too small" if buffer.length <= TAG_LENGTH+1
+    pad_bytes = 1
+    if params[:auth] # old spec used 1 byte for padding, latest one always uses 2 bytes
+      pad_bytes = 2
+    end
+    raise "Block is too small" if buffer.length <= TAG_LENGTH+pad_bytes
     gcm.auth_tag = buffer[-TAG_LENGTH..-1]
     decrypted = gcm.update(buffer[0..-TAG_LENGTH-1]) + gcm.final
     
