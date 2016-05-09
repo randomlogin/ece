@@ -19,7 +19,7 @@ class ECE
   def self.hkdf_extract(salt, ikm) #ikm stays for input keying material
     hmac_hash(salt,ikm)
   end
-  
+
   def self.get_info(type, client_public, server_public)
     cl_len_no = [client_public.size].pack('n')
     sv_len_no = [server_public.size].pack('n')
@@ -104,7 +104,7 @@ class ECE
     raise "Block is too small" if buffer.length <= TAG_LENGTH+pad_bytes
     gcm.auth_tag = buffer[-TAG_LENGTH..-1]
     decrypted = gcm.update(buffer[0..-TAG_LENGTH-1]) + gcm.final
-    
+
     if params[:auth]
       padding_length = decrypted[0..1].unpack("n")[0]
       raise "Padding is too big" if padding_length+2 > decrypted.length
@@ -117,7 +117,7 @@ class ECE
       padding = decrypted[1..padding_length]
       raise "Wrong padding"  unless padding = "\x00"*padding_length
       return decrypted[1..-1]
-    end    
+    end
   end
 
   def self.encrypt_record(params, counter, buffer, pad=0)
@@ -125,7 +125,7 @@ class ECE
     gcm.encrypt
     gcm.key = params[:key]
     gcm.iv = generate_nonce(params[:nonce], counter)
-    gcm.auth_data = "" 
+    gcm.auth_data = ""
     padding = ""
     if params[:auth]
       padding = [pad].pack('n') + "\x00"*pad # 2 bytes, big endian, then n zero bytes of padding
@@ -134,9 +134,8 @@ class ECE
     else
       record = gcm.update("\x00"+buffer) # 1 padding byte, not fully implemented
     end
-    enc = record + gcm.final + gcm.auth_tag 
+    enc = record + gcm.final + gcm.auth_tag
     enc
   end
-
 
 end
