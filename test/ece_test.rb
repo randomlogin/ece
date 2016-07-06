@@ -1,9 +1,7 @@
 require 'test/unit'
 require 'ece'
 
-
 class TestECE < Test::Unit::TestCase
-
 
   def encrypt_decrypt(len=rand(1..500), params={key: Random.new.bytes(16), salt:Random.new.bytes(16)})
     input = Random.new.bytes(len)
@@ -20,7 +18,6 @@ class TestECE < Test::Unit::TestCase
     assert_equal(input, decrypted)
   end
 
-
   def test_simple_workflow
     (0..20).each do |i|
       encrypt_decrypt
@@ -33,11 +30,9 @@ class TestECE < Test::Unit::TestCase
     end
   end
 
-
   def test_wrong_record_size_
     assert_raise(RuntimeError) {encrypt_decrypt(rand(1..5000), {salt: Random.new.bytes(16), key: Random.new.bytes(16), rs: 1}) }
   end
-
 
   def test_wrong_salt
     assert_raise(RuntimeError) {encrypt_decrypt(rand(1..5000), {salt: Random.new.bytes(10), key: Random.new.bytes(20)}) }
@@ -64,6 +59,5 @@ class TestECE < Test::Unit::TestCase
       ECE.decrypt(encrypted[0..truncation], params)
     end
   end
-
 
 end
