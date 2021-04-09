@@ -1,5 +1,3 @@
-### Gem is no longer supported, use at your own risk.
-
 # ECE
 
 Ruby implementation of encrypted content-encoding.
